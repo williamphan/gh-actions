@@ -1,0 +1,20 @@
+name: PR check
+
+on: [pull_request]
+env:
+  NODE_VERSION: 12.13.0
+  CI: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        # node-version: 12.13.0
+    - name: Test
+      run: |
+        npm ci
+        npm test
